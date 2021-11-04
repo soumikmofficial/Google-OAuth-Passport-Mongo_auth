@@ -1,11 +1,13 @@
 const express = require("express");
 const connectDB = require("./config/connect");
 const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api");
 const app = express();
 
 require("dotenv").config();
 
 app.use("/", indexRouter);
+app.use("/api/v1", apiRouter);
 
 const port = process.env.PORT || 3000;
 

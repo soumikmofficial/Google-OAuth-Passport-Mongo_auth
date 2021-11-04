@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const { homePage, dashboard } = require("../controllers/index");
-
-router.route("").get(homePage);
-router.route("/dashboard").get(dashboard);
+const { isAuthenticated, isGuest } = require("../middlewares/isAuthenticated");
+router.route("").get(isGuest, homePage);
+router.route("/dashboard").get(isAuthenticated, dashboard);
 
 module.exports = router;

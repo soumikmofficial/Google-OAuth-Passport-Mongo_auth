@@ -11,7 +11,6 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { googleID, displayName, firstName, lastName } = req.body;
-  console.log(req.body);
   try {
     const user = { googleID, displayName, firstName, lastName };
     await User.create(user);

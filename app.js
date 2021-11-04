@@ -2,6 +2,8 @@ const express = require("express");
 const connectDB = require("./config/connect");
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 const app = express();
 
 require("dotenv").config();
@@ -10,6 +12,20 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+const store = new MongoDBStore({
+  uri: process.env.MONGO_URI,
+  collection: "mySessions",
+});
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+);
 
 app.use("/", indexRouter);
 app.use("/api/v1", apiRouter);

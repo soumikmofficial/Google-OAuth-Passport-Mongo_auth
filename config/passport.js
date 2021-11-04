@@ -9,7 +9,7 @@ module.exports = (passport) => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "http://localhost:5000/auth/google/callback",
       },
-      async function (accessToken, refreshToken, profile, done) {
+      async (accessToken, refreshToken, profile, done) => {
         const newUser = {
           googleID: profile.id,
           displayName: profile.displayName,
@@ -32,11 +32,11 @@ module.exports = (passport) => {
     )
   );
 
-  passport.serializeUser(function (user, done) {
+  passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 
-  passport.deserializeUser(function (id, done) {
+  passport.deserializeUser((id, done) => {
     User.findById(id, function (err, user) {
       done(err, user);
     });

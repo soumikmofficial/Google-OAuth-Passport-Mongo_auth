@@ -12,6 +12,7 @@ const app = express();
 require("dotenv").config();
 require("./config/passport")(passport);
 
+app.use(express.static("./public"));
 app.use(ExpressLayouts);
 app.set("view engine", "ejs");
 

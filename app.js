@@ -4,12 +4,15 @@ const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const ExpressLayouts = require("express-ejs-layouts");
 const app = express();
 
 require("dotenv").config();
 
-// body parser
+app.use(ExpressLayouts);
+app.set("view engine", "ejs");
 
+// body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

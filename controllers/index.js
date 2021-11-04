@@ -2,7 +2,7 @@ const homePage = (req, res) => {
   res.render("home");
 };
 const dashboard = (req, res) => {
-  res.send("<h1>Dashboard</h1>");
+  res.render("dashboard");
 };
 
 module.exports = { homePage, dashboard };
